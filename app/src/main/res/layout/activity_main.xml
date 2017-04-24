@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <!-- CONTENT LAYOUT -->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <!-- NAME TITLE VIEW -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Your name"
+            android:textAllCaps="true" />
+        
+        <!-- USERNAME EDITTEXT -->
+        
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-        <!-- TOPPINGS VIEW -->
+            android:inputType="textMultiLine"
+            android:layout_margin="8dp"
+            android:hint="Sam Buttercup"
+            android:id="@+id/user_name_edittext" />
+        
+        <!-- TOPPINGS TITLE VIEW -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,29 +39,29 @@
             android:text="Toppings"
             android:textAllCaps="true" />
 
-        <!-- TOPPINGS LAYOUT -->
+        <!-- WHIPPED CREAM CHECKBOX -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/whipped_cream_checkbox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_margin="4dp"
+            android:paddingLeft="24dp"
+            android:text="Whipped cream"
+            android:textSize="16sp" />
 
-            <!-- TOPPINGS CHECKBOX -->
+        <!-- WHIPPED CREAM CHECKBOX -->
 
-            <CheckBox
-                android:id="@+id/whipped_cream_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:paddingLeft="24dp"
-                android:text="Whipped cream"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-        <!-- END TOPPINGS LAYOUT -->
-
-
-        <!-- QUANTITY VIEW -->
+        <CheckBox
+            android:id="@+id/chocolate_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:paddingLeft="24dp"
+            android:text="Chocolate"
+            android:textSize="16sp" />
+        
+        <!-- QUANTITY TITLE VIEW -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +110,7 @@
 
         </LinearLayout>
 
-        <!-- PRICE VIEW -->
+        <!-- ORDER SUMMARY TITLE VIEW -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,7 +119,7 @@
             android:text="order summary"
             android:textAllCaps="true" />
 
-        <!-- PRICE VALUE VIEW -->
+        <!-- ORDER SUMMARY VIEW -->
 
         <TextView
             android:id="@+id/order_summary_text_view"
@@ -126,8 +140,7 @@
             android:text="Order"
             android:textAllCaps="true" />
 
-    </ScrollView>
-
-</LinearLayout>
-
     </LinearLayout>
+    <!-- END CONTENT LAYOUT -->
+
+</ScrollView>
