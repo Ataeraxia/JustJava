@@ -17,8 +17,10 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -57,8 +59,12 @@ public class MainActivity extends ActionBarActivity {
     public void submitOrder(View view) {
         CheckBox whippedCreamCheckbox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckbox.isChecked();
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+        EditText getUserName = (EditText) findViewById(R.id.user_name_edittext);
+        Editable userName = getUserName.getText();
         int totalPrice = calculatePrice();
-        String orderSummary = createOrderSummary(totalPrice, hasWhippedCream);
+        String orderSummary = createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, userName);
         displayMessage(orderSummary);
     }
 
@@ -77,9 +83,13 @@ public class MainActivity extends ActionBarActivity {
      *
      * @return orderSummary.
      */
-    private String createOrderSummary(int totalPrice, boolean hasWhippedCream) {
+    private String createOrderSummary(int totalPrice,
+                                      boolean hasWhippedCream,
+                                      boolean hasChocolate,
+                                      Editable userName) {
         String orderSummary = "Name: Little Sheep";
         orderSummary += "\nAdd whipped cream? " + hasWhippedCream;
+        orderSummary += "\nAdd chocolate? " + hasChocolate;
         orderSummary += "\nQuantity: " + quantity;
         orderSummary += "\nTotal: $" + totalPrice;
         orderSummary += "\nThank you!";
