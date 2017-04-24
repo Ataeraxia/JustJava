@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity {
                                       boolean hasWhippedCream,
                                       boolean hasChocolate,
                                       Editable userName) {
-        String orderSummary = "Name: Little Sheep";
+        String orderSummary = "Name: " + userName;
         orderSummary += "\nAdd whipped cream? " + hasWhippedCream;
         orderSummary += "\nAdd chocolate? " + hasChocolate;
         orderSummary += "\nQuantity: " + quantity;
