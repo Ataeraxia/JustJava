@@ -17,7 +17,6 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.text.Editable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -76,23 +75,29 @@ public class MainActivity extends ActionBarActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
         boolean hasChocolate = chocolateCheckBox.isChecked();
         EditText getUserName = (EditText) findViewById(R.id.user_name_edittext);
-        Editable userName = getUserName.getText();
-        totalPrice = coffeeQuantity * coffeePrice;
-        if (hasWhippedCream & hasChocolate) {
-            totalPrice += whippedCreamPrice + chocolatePrice;
-        }
-        else if (hasWhippedCream) {
-            totalPrice += whippedCreamPrice;
-        }
-        else if (hasChocolate) {
-            totalPrice += chocolatePrice;
-        }
-        else {
-            totalPrice = coffeeQuantity * coffeePrice;
-        }
+        String userName = getUserName.getText().toString();
+        totalPrice = calculatePrice(hasWhippedCream, hasChocolate);
         String orderSummary = createOrderSummary(hasWhippedCream, hasChocolate, userName);
         displayMessage(orderSummary);
     }
+
+    /**
+     * Calculates the total price of the order.
+     *
+     * @param hasWhippedCream stores whether or not the whipped cream box is checked.
+     * @param hasChocolate stores whether or not the chocolate box is checked.
+     */
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
+        int basePrice = coffeePrice;
+        if (hasWhippedCream) {
+            basePrice += 1;
+        }
+        if (hasChocolate) {
+            basePrice += 2;
+        }
+        return basePrice * coffeeQuantity;
+    }
+
     /**
      * Creates the order summary text.
      *
@@ -104,7 +109,7 @@ public class MainActivity extends ActionBarActivity {
      */
     private String createOrderSummary(boolean hasWhippedCream,
                                       boolean hasChocolate,
-                                      Editable userName) {
+                                      String userName) {
         String orderSummary = "Name: " + userName;
         orderSummary += "\nAdd whipped cream? " + hasWhippedCream;
         orderSummary += "\nAdd chocolate? " + hasChocolate;
