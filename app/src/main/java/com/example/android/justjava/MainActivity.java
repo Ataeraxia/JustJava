@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This app displays an order form to order coffee.
@@ -48,22 +49,31 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        displayQuantity(coffeeQuantity);
     }
 
     /**
      * This method is called when the plus button is clicked.
      */
     public void increment(View view) {
-        coffeeQuantity += 1;
-        displayQuantity(coffeeQuantity);
+        if (coffeeQuantity == 100) {
+            Toast.makeText(this, "You cannot order more than 100 cups of coffee", Toast.LENGTH_SHORT).show();
+            return;
+        }
+            coffeeQuantity += 1;
+            displayQuantity(coffeeQuantity);
     }
 
     /**
      * This method is called when the minus button is clicked.
      */
     public void decrement(View view) {
-        coffeeQuantity -= 1;
-        displayQuantity(coffeeQuantity);
+        if (coffeeQuantity == 1) {
+            Toast.makeText(this, "You cannot order fewer than 1 cup of coffee", Toast.LENGTH_SHORT).show();
+            return;
+        }
+            coffeeQuantity -= 1;
+            displayQuantity(coffeeQuantity);
     }
 
     /**
@@ -90,10 +100,10 @@ public class MainActivity extends ActionBarActivity {
     private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
         int basePrice = coffeePrice;
         if (hasWhippedCream) {
-            basePrice += 1;
+            basePrice += whippedCreamPrice;
         }
         if (hasChocolate) {
-            basePrice += 2;
+            basePrice += chocolatePrice;
         }
         return basePrice * coffeeQuantity;
     }
