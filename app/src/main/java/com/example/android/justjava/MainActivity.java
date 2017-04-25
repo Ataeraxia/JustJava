@@ -28,8 +28,22 @@ import android.widget.TextView;
  */
 public class MainActivity extends ActionBarActivity {
 
+    // GLOBAL VARIABLES
+
     // Number of cups of coffee ordered
-    int quantity = 2;
+    int coffeeQuantity = 2;
+
+    //Cost of one coffee
+    int coffeePrice = 5;
+
+    //Cost of whipped cream
+    int whippedCreamPrice = 1;
+
+    //Cost of chocolate
+    int chocolatePrice = 2;
+
+    //Total price of the order
+    int totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +55,16 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the plus button is clicked.
      */
     public void increment(View view) {
-        quantity += 1;
-        displayQuantity(quantity);
+        coffeeQuantity += 1;
+        displayQuantity(coffeeQuantity);
     }
 
     /**
      * This method is called when the minus button is clicked.
      */
     public void decrement(View view) {
-        quantity -= 1;
-        displayQuantity(quantity);
+        coffeeQuantity -= 1;
+        displayQuantity(coffeeQuantity);
     }
 
     /**
@@ -63,34 +77,38 @@ public class MainActivity extends ActionBarActivity {
         boolean hasChocolate = chocolateCheckBox.isChecked();
         EditText getUserName = (EditText) findViewById(R.id.user_name_edittext);
         Editable userName = getUserName.getText();
-        int totalPrice = calculatePrice();
-        String orderSummary = createOrderSummary(totalPrice, hasWhippedCream, hasChocolate, userName);
+        totalPrice = coffeeQuantity * coffeePrice;
+        if (hasWhippedCream & hasChocolate) {
+            totalPrice += whippedCreamPrice + chocolatePrice;
+        }
+        else if (hasWhippedCream) {
+            totalPrice += whippedCreamPrice;
+        }
+        else if (hasChocolate) {
+            totalPrice += chocolatePrice;
+        }
+        else {
+            totalPrice = coffeeQuantity * coffeePrice;
+        }
+        String orderSummary = createOrderSummary(hasWhippedCream, hasChocolate, userName);
         displayMessage(orderSummary);
     }
-
-    /**
-     * Calculates the price of the order.
-     */
-    private int calculatePrice() {
-        return quantity * 5;
-    }
-
     /**
      * Creates the order summary text.
      *
-     * @param totalPrice is the total price of the coffees ordered.
+     * @param userName is the text input of our EditText, user_name_edittext.
      * @param hasWhippedCream stores whether or not the whipped cream box has been checked.
+     * @param hasChocolate stores whether or not the chocolate box has been checked.
      *
      * @return orderSummary.
      */
-    private String createOrderSummary(int totalPrice,
-                                      boolean hasWhippedCream,
+    private String createOrderSummary(boolean hasWhippedCream,
                                       boolean hasChocolate,
                                       Editable userName) {
         String orderSummary = "Name: " + userName;
         orderSummary += "\nAdd whipped cream? " + hasWhippedCream;
         orderSummary += "\nAdd chocolate? " + hasChocolate;
-        orderSummary += "\nQuantity: " + quantity;
+        orderSummary += "\nQuantity: " + coffeeQuantity;
         orderSummary += "\nTotal: $" + totalPrice;
         orderSummary += "\nThank you!";
         return orderSummary;

@@ -21,11 +21,11 @@
             android:textAllCaps="true" />
         
         <!-- USERNAME EDITTEXT -->
-        
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
+            android:inputType="textCapWords"
             android:layout_margin="8dp"
             android:hint="Sam Buttercup"
             android:id="@+id/user_name_edittext" />
