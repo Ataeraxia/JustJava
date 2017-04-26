@@ -91,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
         String orderSummary = createOrderSummary(hasWhippedCream, hasChocolate, userName);
 //        displayMessage(orderSummary);
 
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("*/*");
 //        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
         intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + userName);
