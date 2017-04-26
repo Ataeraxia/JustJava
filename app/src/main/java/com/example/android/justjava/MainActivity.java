@@ -15,6 +15,7 @@
  */
 package com.example.android.justjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -88,7 +89,16 @@ public class MainActivity extends ActionBarActivity {
         String userName = getUserName.getText().toString();
         totalPrice = calculatePrice(hasWhippedCream, hasChocolate);
         String orderSummary = createOrderSummary(hasWhippedCream, hasChocolate, userName);
-        displayMessage(orderSummary);
+//        displayMessage(orderSummary);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("*/*");
+//        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + userName);
+        intent.putExtra(Intent.EXTRA_TEXT, orderSummary);
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+//        }
     }
 
     /**
